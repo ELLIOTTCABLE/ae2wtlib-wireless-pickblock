@@ -1,4 +1,4 @@
-package io.ell.ae2wirelesspickblock;
+package io.ell.backports.ae2wtlib_wireless_pickblock;
 
 import com.mojang.logging.LogUtils;
 
@@ -13,21 +13,21 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
 
 import org.slf4j.Logger;
 
-import io.ell.ae2wirelesspickblock.network.PickBlockPacket;
+import io.ell.backports.ae2wtlib_wireless_pickblock.network.PickBlockPacket;
 
 /**
  * Entry point. Wires up the C2S payload (both sides) and the client config toggle. The behaviour itself
  * lives in the client mixin ({@code mixin.MinecraftMixin}) and the server handler ({@link PickBlockHandler}).
  */
-@Mod(Ae2WirelessPickBlock.MODID)
-public final class Ae2WirelessPickBlock {
-   public static final String MODID = "ae2wirelesspickblock";
+@Mod(Ae2wtlibWirelessPickblock.MODID)
+public final class Ae2wtlibWirelessPickblock {
+   public static final String MODID = "ae2wtlib_wireless_pickblock";
    public static final Logger LOGGER = LogUtils.getLogger();
 
-   public Ae2WirelessPickBlock(IEventBus modBus, ModContainer container) {
+   public Ae2wtlibWirelessPickblock(IEventBus modBus, ModContainer container) {
       modBus.addListener(this::registerPayloads);
       if (FMLEnvironment.dist == Dist.CLIENT) {
-         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Ae2WirelessPickBlockConfig.SPEC);
+         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Ae2wtlibWirelessPickblockConfig.SPEC);
       }
       LOGGER.info("[{}] loaded", MODID);
    }

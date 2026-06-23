@@ -1,4 +1,4 @@
-package io.ell.ae2wirelesspickblock;
+package io.ell.backports.ae2wtlib_wireless_pickblock;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  * server-side extraction is authoritative regardless — it only ever moves an item the player could
  * already pull from the terminal GUI — so this just controls whether the client bothers to ask.
  */
-public final class Ae2WirelessPickBlockConfig {
+public final class Ae2wtlibWirelessPickblockConfig {
    public static final ModConfigSpec SPEC;
    private static final ModConfigSpec.BooleanValue PICK_BLOCK_FROM_NETWORK;
 
@@ -25,7 +25,7 @@ public final class Ae2WirelessPickBlockConfig {
       SPEC = builder.build();
    }
 
-   private Ae2WirelessPickBlockConfig() {
+   private Ae2wtlibWirelessPickblockConfig() {
    }
 
    public static boolean pickBlockFromNetwork() {

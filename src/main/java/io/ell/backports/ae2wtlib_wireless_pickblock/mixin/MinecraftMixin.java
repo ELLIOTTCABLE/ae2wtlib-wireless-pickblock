@@ -1,4 +1,4 @@
-package io.ell.ae2wirelesspickblock.mixin;
+package io.ell.backports.ae2wtlib_wireless_pickblock.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -15,8 +15,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.registration.NetworkRegistry;
 
-import io.ell.ae2wirelesspickblock.Ae2WirelessPickBlockConfig;
-import io.ell.ae2wirelesspickblock.network.PickBlockPacket;
+import io.ell.backports.ae2wtlib_wireless_pickblock.Ae2wtlibWirelessPickblockConfig;
+import io.ell.backports.ae2wtlib_wireless_pickblock.network.PickBlockPacket;
 
 /**
  * Asks the server to satisfy a failed pick-block from a carried wireless terminal's network. Observational
@@ -38,7 +38,7 @@ public abstract class MinecraftMixin {
          target = "Lnet/minecraft/world/entity/player/Inventory;findSlotMatchingItem(Lnet/minecraft/world/item/ItemStack;)I"))
    private int ae2wpb$pickFromNetworkOnMiss(int slot, @Local ItemStack picked) {
       if (slot == -1 && !player.getAbilities().instabuild && !player.isSpectator()
-            && Ae2WirelessPickBlockConfig.pickBlockFromNetwork()) {
+            && Ae2wtlibWirelessPickblockConfig.pickBlockFromNetwork()) {
          ae2wpb$requestNetworkPick(picked);
       }
       return slot;

@@ -4,7 +4,7 @@
  * de.mari_023.ae2wtlib.AE2wtlibEvents#pickBlock. AE2WTLib is MIT-licensed and so is this file (see
  * LICENSE). It only *links* AE2's LGPL storage API; no AE2 source is copied here.
  */
-package io.ell.ae2wirelesspickblock;
+package io.ell.backports.ae2wtlib_wireless_pickblock;
 
 import net.minecraft.network.protocol.game.ClientboundSetCarriedItemPacket;
 import net.minecraft.server.level.ServerPlayer;

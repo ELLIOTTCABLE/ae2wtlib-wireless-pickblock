@@ -1,4 +1,4 @@
-package io.ell.ae2wirelesspickblock.network;
+package io.ell.backports.ae2wtlib_wireless_pickblock.network;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -8,8 +8,8 @@ import net.minecraft.world.item.ItemStack;
 
 import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
-import io.ell.ae2wirelesspickblock.Ae2WirelessPickBlock;
-import io.ell.ae2wirelesspickblock.PickBlockHandler;
+import io.ell.backports.ae2wtlib_wireless_pickblock.Ae2wtlibWirelessPickblock;
+import io.ell.backports.ae2wtlib_wireless_pickblock.PickBlockHandler;
 
 /**
  * Client → server request to satisfy a failed pick-block from the player's linked ME network.
@@ -20,12 +20,12 @@ import io.ell.ae2wirelesspickblock.PickBlockHandler;
  * take from the terminal GUI.
  *
  * <p>NeoForge 20.4 payload shape (id + write + a static reader), modelled on AE2's own serverbound
- * packets. Registered {@code optional} in {@link Ae2WirelessPickBlock} so a client carrying this mod can
+ * packets. Registered {@code optional} in {@link Ae2wtlibWirelessPickblock} so a client carrying this mod can
  * still join a server without it.
  */
 public record PickBlockPacket(ItemStack item) implements CustomPacketPayload {
 
-   public static final ResourceLocation ID = new ResourceLocation(Ae2WirelessPickBlock.MODID, "pick_block");
+   public static final ResourceLocation ID = new ResourceLocation(Ae2wtlibWirelessPickblock.MODID, "pick_block");
 
    public static PickBlockPacket decode(FriendlyByteBuf buf) {
       return new PickBlockPacket(buf.readItem());

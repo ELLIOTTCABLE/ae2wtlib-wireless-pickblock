@@ -1,4 +1,4 @@
-# AE2 wireless pick-block backport — implementation plan
+# AE2 Wireless Terminals: Pick-Block Backport — implementation plan
 
 For a fresh implementation context ("conductor"). This is a guide, not a contract: the recommendations
 below are where the research landed, but you're as capable as the author — if you find a better path,
@@ -74,7 +74,7 @@ Note its license is LGPL because it copied AE2 *source*; ours is MIT (§8) — d
 ## 4. Shape of the implementation
 
 Roughly three pieces plus a toggle. Suggested package layout is already stubbed under
-`io.ell.ae2wirelesspickblock` (`mixin/`, `network/`).
+`io.ell.backports.ae2wtlib_wireless_pickblock` (`mixin/`, `network/`).
 
 1. **Client mixin** `mixin/MinecraftMixin` into `net.minecraft.client.Minecraft#pickBlock()`.
    - On 1.20.4 the method is still named `pickBlock` (renamed only in 1.21.2+), so this is the right hook.
@@ -86,7 +86,7 @@ Roughly three pieces plus a toggle. Suggested package layout is already stubbed 
    - Keep it observational: don't cancel vanilla; just send the packet when the "already-have-it" slot is
      `-1` and the player isn't creative/spectator. Other mods also hook pick-block (Mouse Tweaks, Pick
      Block Pro, inventory sorters) — assume you're not the only injector.
-   - Add the class to `ae2wirelesspickblock.mixins.json` `"client"`.
+   - Add the class to `ae2wtlib_wireless_pickblock.mixins.json` `"client"`.
 
 2. **C2S packet** `network/PickBlockPacket` on NeoForge 20.4's payload system.
    - 20.4 uses `RegisterPayloadHandlerEvent` → `IPayloadRegistrar` (`.playToServer(...)`), and
@@ -206,6 +206,6 @@ the `LICENSE` already carries the dual copyright line.
 
 ## 12. Naming
 
-`mod_id` / package / folder are `ae2wirelesspickblock` / `io.ell.ae2wirelesspickblock` /
-`ae2-wireless-pickblock-backport`. All a suggestion — trivially changeable if the author prefers something
+`mod_id` / package / folder are `ae2wtlib_wireless_pickblock` / `io.ell.backports.ae2wtlib_wireless_pickblock` /
+`ae2wtlib-wireless-pickblock`. All a suggestion — trivially changeable if the author prefers something
 else (e.g. a broader name if the suite in §11 materialises).

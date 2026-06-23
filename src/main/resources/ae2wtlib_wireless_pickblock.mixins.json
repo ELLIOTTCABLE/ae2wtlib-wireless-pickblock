@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "io.ell.ae2wirelesspickblock.mixin",
+  "package": "io.ell.backports.ae2wtlib_wireless_pickblock.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
     "MinecraftMixin"
