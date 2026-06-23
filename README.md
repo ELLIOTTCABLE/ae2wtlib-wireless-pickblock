@@ -1,5 +1,9 @@
 # AE2 Wireless Terminals: Pick-Block Backport
 
+AI-generated slop; if you hate that, don't use it; I wouldn't.
+
+----
+
 A small client-and-server NeoForge mod for Minecraft **1.20.4** that backports AE2WTLib's
 *"pick block through wireless terminal"* feature to the frozen 1.20.4 line.
 
@@ -32,5 +36,3 @@ the feature, so it's the only version this targets — and the mod refuses to lo
 
 MIT. The pick-block logic is adapted from AE2WTLib by Mari023 and contributors (also MIT); AE2's storage
 API is used under its LGPL-3.0 terms (linked, not copied). See `LICENSE`.
-
-> AI-assisted. Review before you trust it.
