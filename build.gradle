@@ -62,20 +62,21 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // ---- Mod dependencies we compile against (see IMPLEMENTATION_PLAN.md "Build wiring") ----
-    // Commented so the bare scaffold builds green and you can verify the toolchain first. Resolve the
-    // AE2WTLib coordinate, then uncomment. transitive=false keeps only each mod's own classes on the
-    // compile classpath (we don't want to drag in their whole dep trees just to compile).
-    //
+    // Both compileOnly: the real AE2 + AE2WTLib are present at runtime (in the pack / on the server).
+    // transitive=false keeps only each mod's own classes on the compile classpath — we don't want their
+    // whole dep trees (curios, etc.) just to reference a handful of types.
+
     // AE2 — storage API used by the server-side extraction: Actionable, AEItemKey, PlayerSource, IGrid,
-    //       getStorageService().getInventory().
-    // compileOnly("appeng:appliedenergistics2-neoforge:${ae2_version}") { transitive = false }
-    //
-    // AE2WTLib — we ride on its (internal, but frozen-and-stable on the 17.x line) CraftingTerminalHandler
-    //            to find the carried terminal, its linked grid, and range. Pick ONE that resolves:
-    //   (a) maven (verify which repo serves it):
-    // compileOnly("de.mari_023:ae2wtlib:${ae2wtlib_version}") { transitive = false }
-    //   (b) most reliable — the exact jar from your pack's mods/ folder, dropped into ./libs:
-    // compileOnly files("libs/ae2wtlib-${ae2wtlib_version}.jar")
+    //       getStorageService().getInventory(). Served by ModMaven.
+    compileOnly("appeng:appliedenergistics2-neoforge:${ae2_version}") { transitive = false }
+
+    // AE2WTLib — we ride on its (internal, frozen-on-17.x) CraftingTerminalHandler to find the carried
+    //       terminal, its linked grid, and range. ModMaven only mirrors AE2WTLib's 19.x (1.21) line, so the
+    //       frozen 17.x line comes from Modrinth's maven instead. The Modrinth artifact id is the project
+    //       slug (project id pNabrMMw); the jar it serves is the same ae2wtlib-17.12.0-beta.jar the pack
+    //       ships, so CI resolves it with no committed binary. Offline fallback: drop that jar into ./libs
+    //       and swap this line for `compileOnly files("libs/ae2wtlib-${ae2wtlib_version}.jar")`.
+    compileOnly("maven.modrinth:applied-energistics-2-wireless-terminals:${ae2wtlib_version}") { transitive = false }
 }
 
 // Expand placeholders (${mod_id} etc.) in mods.toml from the properties above.
