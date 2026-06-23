@@ -1,0 +1,50 @@
+# Loading metadata. Placeholder values are filled from gradle.properties at build time
+# by the ProcessResources task in build.gradle.
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+# Both-sides mod: the pick-block detection is a client mixin, but the network extraction runs server-side.
+# IGNORE_ALL_VERSION so a client carrying this mod isn't flagged when joining a server without it (and
+# vice-versa). The client must then tolerate a server that doesn't know our packet channel — see the plan.
+displayTest="IGNORE_ALL_VERSION"
+
+# Our client-side pick-block mixin (the server side is a normal payload handler, not a mixin).
+[[mixins]]
+config="${mod_id}.mixins.json"
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+# We ride on AE2WTLib's terminal handler: it must be present and load first. 17.x is the 1.20.4 line.
+[[dependencies.${mod_id}]]
+    modId="ae2wtlib"
+    type="required"
+    versionRange="[17,18)"
+    ordering="AFTER"
+    side="BOTH"
+
+# AE2 itself (AE2WTLib pulls it in, but we call its storage API directly too).
+[[dependencies.${mod_id}]]
+    modId="ae2"
+    type="required"
+    versionRange="[17,18)"
+    ordering="AFTER"
+    side="BOTH"
