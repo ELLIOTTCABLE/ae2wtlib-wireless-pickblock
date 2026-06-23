@@ -14,12 +14,19 @@ your 1.20.4 pack ships doesn't have it. This re-adds just that one behaviour.
 
 ## Requires
 
-- Minecraft 1.20.4 / NeoForge 20.4+
+- Minecraft 1.20.4 **only** / NeoForge 20.4.x
 - Applied Energistics 2 (17.x)
 - AE2WTLib / "AE2 Wireless Terminals" (17.x)
 
 Client-side install is enough for single-player and LAN; a dedicated server needs it installed too
 (the extraction runs server-side).
+
+## Why only 1.20.4?
+
+Deliberately single-version. AE2WTLib added pick-block *after* the 1.20.4 line froze; the versions that
+have it upstream — 1.20.1 (Forge/NeoForge) and 1.21+ — aren't targeted here, and 1.20.5+ switched items to
+data components so this code wouldn't apply there anyway. 1.20.4 is the one still-used line left without
+the feature, so it's the only version this targets — and the mod refuses to load on anything else.
 
 ## Credits & license
 
